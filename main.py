@@ -45,7 +45,7 @@ if __name__ == '__main__':
         #print(f"Connection to {host}, database: {database2}, for user {user} created successfully.")
         with engine.connect() as connection:
             # all kentucky zipcodes in zipcodes two
-            result = connection.execute(text("SELECT Zipcode FROM zipcodes_one WHERE State='KY'"))
+            result = connection.execute(text("SELECT Zipcode FROM zipcodes_two WHERE State='KY'"))
             for row in result:
                 print(row)
 
