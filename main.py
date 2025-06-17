@@ -1,4 +1,5 @@
 from sqlalchemy import create_engine
+from sqlalchemy import text
 
 user = 'maxuser'
 password = 'maxpwd'
@@ -59,7 +60,7 @@ if __name__ == '__main__':
         engine = get_connection2()
         with engine.connect() as connection:
             # all zipcodes between 40000 and 41000 in zipcodes two
-            result = connection.execute(text("SELECT Zipcode FROM zipcodes_one WHERE Zipcode >= 40000 AND Zipcode <= 41000"))
+            result = connection.execute(text("SELECT Zipcode FROM zipcodes_two WHERE Zipcode >= 40000 AND Zipcode <= 41000"))
             for row in result:
                 print(row)
 
@@ -74,7 +75,7 @@ if __name__ == '__main__':
         engine = get_connection2()
         with engine.connect() as connection:
             # the total wages in Pennsylvania in zipcodes two
-            result = connection.execute(text("SELECT TotalWages FROM zipcodes_one WHERE State='PA'"))
+            result = connection.execute(text("SELECT TotalWages FROM zipcodes_two WHERE State='PA'"))
             for row in result:
                 print(row)
 
