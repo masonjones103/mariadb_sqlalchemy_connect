@@ -27,20 +27,56 @@ if __name__ == '__main__':
       
         # GET THE CONNECTION OBJECT (ENGINE) FOR THE DATABASE
         engine = get_connection1()
-        print(
-            f"Connection to {host}, database: {database1}, for user {user} created successfully.")
+        #print(f"Connection to {host}, database: {database1}, for user {user} created successfully.")
         with engine.connect() as connection:
             # largest zip code in zipcodes one
             result = connection.execute(text("SELECT MAX(Zipcode) FROM zipcodes_one"))
-            print("The largest zip code in zipcodes one is:")
+            input("The largest zip code in zipcodes one is:")
             for row in result:
                 print(row)
-            result = connection.execute(text("SELECT * FROM zipcodes_one WHERE State='KY'"))
-            print("All zipcodes from Kentucky:")
+            # all kentucky zipcodes in zipcodes one
+            result = connection.execute(text("SELECT Zipcode FROM zipcodes_one WHERE State='KY'"))
+            input("All zipcodes from Kentucky:")
             for row in result:
                 print(row)
+
         engine = get_connection2()
-        print(
-            f"Connection to {host}, database: {database2}, for user {user} created successfully.")
+        #print(f"Connection to {host}, database: {database2}, for user {user} created successfully.")
+        with engine.connect() as connection:
+            # all kentucky zipcodes in zipcodes two
+            result = connection.execute(text("SELECT Zipcode FROM zipcodes_one WHERE State='KY'"))
+            for row in result:
+                print(row)
+
+        engine = get_connection1()
+        with engine.connect() as connection:
+            # all zipcodes between 40000 and 41000 in zipcodes one
+            result = connection.execute(text("SELECT Zipcode FROM zipcodes_one WHERE Zipcode >= 40000 AND Zipcode <= 41000"))
+            input("All zipcodes between 40000 and 41000:")
+            for row in result:
+                print(row)
+
+        engine = get_connection2()
+        with engine.connect() as connection:
+            # all zipcodes between 40000 and 41000 in zipcodes two
+            result = connection.execute(text("SELECT Zipcode FROM zipcodes_one WHERE Zipcode >= 40000 AND Zipcode <= 41000"))
+            for row in result:
+                print(row)
+
+        engine = get_connection1()
+        with engine.connect() as connection:
+            # the total wages in Pennsylvania in zipcodes one
+            result = connection.execute(text("SELECT TotalWages FROM zipcodes_one WHERE State='PA'"))
+            input("Total wages from Pennsylvania:")
+            for row in result:
+                print(row)
+
+        engine = get_connection2()
+        with engine.connect() as connection:
+            # the total wages in Pennsylvania in zipcodes two
+            result = connection.execute(text("SELECT TotalWages FROM zipcodes_one WHERE State='PA'"))
+            for row in result:
+                print(row)
+
     except Exception as ex:
         print("Connection could not be made due to the following error: \n", ex)
