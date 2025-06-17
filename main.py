@@ -29,6 +29,16 @@ if __name__ == '__main__':
         engine = get_connection1()
         print(
             f"Connection to {host}, database: {database1}, for user {user} created successfully.")
+        with engine.connect() as connection:
+            # largest zip code in zipcodes one
+            result = connection.execute(text("SELECT MAX(Zipcode) FROM zipcodes_one"))
+            print("The largest zip code in zipcodes one is:")
+            for row in result:
+                print(row)
+            result = connection.execute(text("SELECT * FROM zipcodes_one WHERE State='KY'"))
+            print("All zipcodes from Kentucky:")
+            for row in result:
+                print(row)
         engine = get_connection2()
         print(
             f"Connection to {host}, database: {database2}, for user {user} created successfully.")
