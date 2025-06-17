@@ -1,3 +1,8 @@
+# Mason Jones
+# CNE 370
+# Spring 2025
+# code outline sourced from https://www.geeksforgeeks.org/python/connecting-to-sql-database-using-sqlalchemy-in-python/
+
 from sqlalchemy import create_engine
 from sqlalchemy import text
 
