@@ -1,7 +1,8 @@
-# Mason Jones
+# Mason Jones mcjones@student.rtc.edu
 # CNE 370
 # Spring 2025
 # code outline sourced from https://www.geeksforgeeks.org/python/connecting-to-sql-database-using-sqlalchemy-in-python/
+# code uses sqlalchemy create_engine to connect to the mariadb database and uses the text module to query the databases.
 
 from sqlalchemy import create_engine
 from sqlalchemy import text
@@ -33,7 +34,6 @@ if __name__ == '__main__':
       
         # GET THE CONNECTION OBJECT (ENGINE) FOR THE DATABASE
         engine = get_connection1()
-        #print(f"Connection to {host}, database: {database1}, for user {user} created successfully.")
         with engine.connect() as connection:
             # largest zip code in zipcodes one
             result = connection.execute(text("SELECT MAX(Zipcode) FROM zipcodes_one"))
@@ -47,7 +47,6 @@ if __name__ == '__main__':
                 print(row)
 
         engine = get_connection2()
-        #print(f"Connection to {host}, database: {database2}, for user {user} created successfully.")
         with engine.connect() as connection:
             # all kentucky zipcodes in zipcodes two
             result = connection.execute(text("SELECT Zipcode FROM zipcodes_two WHERE State='KY'"))
